@@ -15,6 +15,10 @@ export class OperationsService {
     return this.operations;
   }
 
+  public getOperationById(id: string): Operation {
+    return this.operations.find(o => o._id === id);
+  }
+
   public saveOperation(operation: Operation) {
     operation._id = new Date().getTime().toString();
     this.operations.push(operation);
