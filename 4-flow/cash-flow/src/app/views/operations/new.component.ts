@@ -44,13 +44,7 @@ export class NewComponent implements OnInit {
   ngOnInit() {}
 
   public saveOperation() {
-    const clonedOperation = this.cloneOperation(this.operation);
-    this.save.emit(clonedOperation);
+    this.save.emit(this.operation);
     this.operation = new Operation();
-  }
-
-  cloneOperation(originalOperation: Operation): Operation {
-    const targetOperation = Object.assign({}, originalOperation);
-    return targetOperation;
   }
 }
