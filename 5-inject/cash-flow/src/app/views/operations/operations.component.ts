@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Operation } from "./operation";
+import { OperationsService } from "./operations.service";
 
 @Component({
   selector: "cf-operations",
@@ -19,19 +20,24 @@ import { Operation } from "./operation";
 export class OperationsComponent implements OnInit {
   public numberOfOperations = 0;
   public operations: Operation[] = [];
-  constructor() {}
+  constructor(private operationsService: OperationsService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.refreshData();
+  }
 
   public saveOperation(operation: Operation) {
-    operation._id = new Date().getTime().toString();
-    this.operations.push(operation);
-    this.numberOfOperations = this.operations.length;
+    this.operationsService.saveOperation(operation);
+    this.refreshData();
   }
 
   public deleteOperation(operation: Operation) {
-    const index = this.operations.indexOf(operation);
-    this.operations.splice(index, 1);
-    this.numberOfOperations = this.operations.length;
+    this.operationsService.deleteOperation(operation);
+    this.refreshData();
+  }
+
+  private refreshData() {
+    this.numberOfOperations = this.operationsService.getNumberOfOperations();
+    this.operations = this.operationsService.getOperationsList();
   }
 }
