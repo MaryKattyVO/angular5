@@ -2,7 +2,8 @@
   "name": "cash-flow",
   "version": "5.3.0",
   "description": "Formularios, tablas y modelos de datos en Angular",
-  "homepage": "http://academia-binaria.com/base-aplicacion-angular/",
+  "homepage":
+    "http://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular/",
   "author": {
     "name": "Alberto Basalo",
     "url": "https://twitter.com/albertobasalo"
