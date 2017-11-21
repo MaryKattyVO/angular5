@@ -8,7 +8,7 @@ import {
 import { Observable } from "rxjs/Observable";
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class TokenInterceptorService implements HttpInterceptor {
   private token: string = "NoAuthorizationProvided";
   constructor() {}
 

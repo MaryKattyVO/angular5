@@ -7,8 +7,8 @@ import { ComponentsModule } from "./lib/components/components.module";
 import { HomeModule } from "./views/home/home.module";
 import { NotFoundModule } from "./views/not-found/not-found.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { TokenInterceptor } from "./lib/token.service";
-import { CatchInterceptor } from "./lib/catch.service";
+import { TokenInterceptorService } from "./lib/token-interceptor.service";
+import { CatchInterceptorService } from "./lib/catch-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,12 +23,12 @@ import { CatchInterceptor } from "./lib/catch.service";
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: TokenInterceptorService,
       multi: true
     },
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: CatchInterceptor,
+      useClass: CatchInterceptorService,
       multi: true
     }
   ],

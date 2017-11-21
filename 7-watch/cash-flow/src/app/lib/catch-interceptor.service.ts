@@ -11,7 +11,7 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do";
 
 @Injectable()
-export class CatchInterceptor implements HttpInterceptor {
+export class CatchInterceptorService implements HttpInterceptor {
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
