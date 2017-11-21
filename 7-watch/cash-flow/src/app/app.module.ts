@@ -8,6 +8,7 @@ import { HomeModule } from "./views/home/home.module";
 import { NotFoundModule } from "./views/not-found/not-found.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptor } from "./lib/token.service";
+import { CatchInterceptor } from "./lib/catch.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,11 @@ import { TokenInterceptor } from "./lib/token.service";
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CatchInterceptor,
       multi: true
     }
   ],
