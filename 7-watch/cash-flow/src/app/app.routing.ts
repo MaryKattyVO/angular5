@@ -9,6 +9,10 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: "credentials",
+    loadChildren: "./views/credentials/credentials.module#CredentialsModule"
+  },
+  {
     path: "operations",
     loadChildren: "./views/operations/operations.module#OperationsModule"
   },
