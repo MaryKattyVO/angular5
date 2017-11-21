@@ -6,6 +6,8 @@ import { AppComponent } from "./app.component";
 import { ComponentsModule } from "./lib/components/components.module";
 import { HomeModule } from "./views/home/home.module";
 import { NotFoundModule } from "./views/not-found/not-found.module";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
+import { TokenInterceptor } from "./lib/token.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,9 +16,16 @@ import { NotFoundModule } from "./views/not-found/not-found.module";
     BrowserModule,
     ComponentsModule,
     HomeModule,
+    HttpClientModule,
     NotFoundModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
