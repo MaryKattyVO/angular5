@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CredentialsService } from "./credentials.service";
+import { BusService } from "../../lib/bus.service";
 
 @Component({
   selector: "cf-login",
@@ -24,7 +25,10 @@ import { CredentialsService } from "./credentials.service";
 export class LoginComponent implements OnInit {
   public credential = { email: "admin@cash-flow.com", password: "secret" };
   public loginResult;
-  constructor(private credentialsService: CredentialsService) {}
+  constructor(
+    private credentialsService: CredentialsService,
+    private busService: BusService
+  ) {}
 
   ngOnInit() {}
 
@@ -32,6 +36,7 @@ export class LoginComponent implements OnInit {
     this.credentialsService.postLogin(this.credential).subscribe(
       data => {
         this.loginResult = data;
+        this.busService.emitUserToken(data);
       },
       error => {
         this.loginResult = error;

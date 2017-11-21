@@ -9,6 +9,7 @@ import { NotFoundModule } from "./views/not-found/not-found.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { TokenInterceptorService } from "./lib/token-interceptor.service";
 import { CatchInterceptorService } from "./lib/catch-interceptor.service";
+import { BusService } from "./lib/bus.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { CatchInterceptorService } from "./lib/catch-interceptor.service";
     NotFoundModule
   ],
   providers: [
+    BusService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

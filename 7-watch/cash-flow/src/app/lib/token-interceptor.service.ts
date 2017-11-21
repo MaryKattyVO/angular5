@@ -6,11 +6,16 @@ import {
   HttpRequest
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
+import { BusService } from "./bus.service";
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
   private token: string = "NoAuthorizationProvided";
-  constructor() {}
+  constructor(private busService: BusService) {
+    this.busService
+      .getUserToken$()
+      .subscribe(data => (this.token = data.token));
+  }
 
   intercept(
     req: HttpRequest<any>,

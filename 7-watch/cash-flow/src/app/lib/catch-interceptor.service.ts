@@ -17,9 +17,7 @@ export class CatchInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     return next.handle(req).do(
-      (event: HttpEvent<any>) => {
-        console.log(req.url);
-      },
+      (event: HttpEvent<any>) => {},
       (err: any) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
