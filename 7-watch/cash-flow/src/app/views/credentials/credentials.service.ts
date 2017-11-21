@@ -5,7 +5,7 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class CredentialsService {
-  private url = environment.apiUrl + "/api/pub/";
+  private url = environment.apiUrl + "pub/credentials/";
   constructor(private http: HttpClient) {}
 
   public postLogin(credential): Observable<any> {
