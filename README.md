@@ -10,9 +10,12 @@ Listado de artículos para seguir el código:
 
 - [3 - Formularios, tablas y modelos de datos en Angular](http://academia-binaria.com/formularios-tablas-y-modelos-de-datos-en-angular//)
 
-> To be continued....
-- [4 - Flujo de datos entre componentes Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
+- [4 - Flujo de datos entre componentes Angular](http://academia-binaria.com/flujo-de-datos-entre-componentes-angular/)
+
+> Work in progress. To be continued....
 
 - [5 - Servicios inyectables en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
 
 - [6 - Comunicaciones HTTP en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
+
+- [7 - Vigilancia y seguridad en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
