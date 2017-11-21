@@ -2,9 +2,9 @@ import { Component, OnInit } from "@angular/core";
 import { CredentialsService } from "./credentials.service";
 
 @Component({
-  selector: "cf-login",
+  selector: "cf-registration",
   template: `
-  <h2>Log In</h2>
+  <h2>New Registration</h2>
   <form class="container">
     <label for="email">Email</label>
     <input name="email"
@@ -14,27 +14,27 @@ import { CredentialsService } from "./credentials.service";
     <input name="password"
       [(ngModel)]="credential.password"
       type="password"/>
-    <button (click)="login()">Login</button>
-    <a [routerLink]="['..','registration']">Register</a>
+    <button (click)="register()">Register</button>
+    <a [routerLink]="['..','login']">Login</a>
   </form>
-  {{ loginResult | json}}
+  {{ registrationResult | json}}
   `,
   styles: []
 })
-export class LoginComponent implements OnInit {
-  public credential = { email: "admin@cash-flow.com", password: "secret" };
-  public loginResult;
+export class RegistrationComponent implements OnInit {
+  public credential = { email: "", password: "" };
+  public registrationResult;
   constructor(private credentialsService: CredentialsService) {}
 
   ngOnInit() {}
 
-  public login() {
-    this.credentialsService.postLogin(this.credential).subscribe(
+  public register() {
+    this.credentialsService.postRegistration(this.credential).subscribe(
       data => {
-        this.loginResult = data;
+        this.registrationResult = data;
       },
       error => {
-        this.loginResult = error;
+        this.registrationResult = error;
       }
     );
   }

@@ -12,7 +12,7 @@ export class CredentialsService {
     return this.http.post(this.url + "login", credential);
   }
 
-  public postRegistration(credential) {
+  public postRegistration(credential): Observable<any> {
     return this.http.post(this.url + "registration", credential);
   }
 }
