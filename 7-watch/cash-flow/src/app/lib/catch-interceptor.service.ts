@@ -9,10 +9,13 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/do";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class CatchInterceptorService implements HttpInterceptor {
-  intercept(
+  constructor(private router: Router) {}
+
+  public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
@@ -24,10 +27,18 @@ export class CatchInterceptorService implements HttpInterceptor {
   private catchError(err) {
     if (err instanceof HttpErrorResponse) {
       if (err.status === 401) {
-        console.warn(err.statusText);
+        this.catchUnauthorized(err);
       } else {
         console.error(err.statusText);
       }
     }
+  }
+
+  private catchUnauthorized(err) {
+    console.warn(err.statusText);
+    this.navigateToLogin();
+  }
+  private navigateToLogin() {
+    this.router.navigateByUrl("/credentials/login");
   }
 }

@@ -13,6 +13,10 @@ export class TokenInterceptorService implements HttpInterceptor {
   private token: string = "NoAuthorizationProvided";
 
   constructor(private busService: BusService) {
+    this.subscribeToTokenChanges();
+  }
+
+  private subscribeToTokenChanges() {
     this.busService
       .getUserToken$()
       .subscribe(
