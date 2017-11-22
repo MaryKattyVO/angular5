@@ -19,14 +19,10 @@ import { ActivatedRoute } from "@angular/router";
     <button (click)="sendCredential()">{{ pageData.title }}</button>
     <a [routerLink]="['..',pageData.alternate | lowercase]">{{ pageData.alternate }}</a>
   </form>
-  {{ loginResult | json}}
-  {{ pageData | json}}
   `,
   styles: []
 })
 export class CredentialsComponent implements OnInit {
-  public loginResult;
-
   public pageData = {
     alternate: "Registration",
     credential: { email: "admin@cash-flow.com", password: "secret" },
@@ -48,11 +44,10 @@ export class CredentialsComponent implements OnInit {
       .sendCredential(this.pageData.credential, this.pageData.title)
       .subscribe(
         data => {
-          this.loginResult = data;
           this.busService.emitUserToken(data);
         },
         error => {
-          this.loginResult = error;
+          this.busService.emitUserToken(null);
         }
       );
   }

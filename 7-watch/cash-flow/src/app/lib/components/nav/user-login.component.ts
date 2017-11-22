@@ -12,6 +12,7 @@ import { Observable } from "rxjs/Observable";
 })
 export class UserLoginComponent implements OnInit {
   public userIsAnonymous$: Observable<boolean>;
+
   constructor(private busService: BusService) {}
 
   ngOnInit() {

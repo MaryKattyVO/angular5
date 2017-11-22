@@ -15,7 +15,9 @@ export class TokenInterceptorService implements HttpInterceptor {
   constructor(private busService: BusService) {
     this.busService
       .getUserToken$()
-      .subscribe(data => (this.token = data.token));
+      .subscribe(
+        data => (this.token = data ? data.token : "NoAuthorizationProvided")
+      );
   }
 
   public intercept(

@@ -20,6 +20,6 @@ export class BusService {
 
   emitUserToken(userToken: any) {
     this.userToken$.next(userToken);
-    this.userIsAnonymous$.next(false);
+    this.userIsAnonymous$.next(userToken == null);
   }
 }
