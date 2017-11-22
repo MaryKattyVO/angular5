@@ -8,11 +8,7 @@ export class CredentialsService {
   private url = environment.apiUrl + "pub/credentials/";
   constructor(private http: HttpClient) {}
 
-  public postLogin(credential): Observable<any> {
-    return this.http.post(this.url + "login", credential);
-  }
-
-  public postRegistration(credential): Observable<any> {
-    return this.http.post(this.url + "registration", credential);
+  public sendCredential(credential, service: string): Observable<any> {
+    return this.http.post(this.url + service.toLowerCase(), credential);
   }
 }

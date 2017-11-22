@@ -16,17 +16,18 @@ export class CatchInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next.handle(req).do(
-      (event: HttpEvent<any>) => {},
-      (err: any) => {
-        if (err instanceof HttpErrorResponse) {
-          if (err.status === 401) {
-            console.warn(err.statusText);
-          } else {
-            console.error(err.statusText);
-          }
-        }
+    return next
+      .handle(req)
+      .do((event: HttpEvent<any>) => {}, (err: any) => this.catchError(err));
+  }
+
+  private catchError(err) {
+    if (err instanceof HttpErrorResponse) {
+      if (err.status === 401) {
+        console.warn(err.statusText);
+      } else {
+        console.error(err.statusText);
       }
-    );
+    }
   }
 }

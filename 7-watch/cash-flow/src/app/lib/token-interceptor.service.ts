@@ -11,18 +11,23 @@ import { BusService } from "./bus.service";
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
   private token: string = "NoAuthorizationProvided";
+
   constructor(private busService: BusService) {
     this.busService
       .getUserToken$()
       .subscribe(data => (this.token = data.token));
   }
 
-  intercept(
+  public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const headers = req.headers.set("Authorization", `Bearer ${this.token}`);
-    const authReq = req.clone({ headers });
+    const authReq = this.setAuthHeader(req);
     return next.handle(authReq);
+  }
+
+  private setAuthHeader(req: HttpRequest<any>): HttpRequest<any> {
+    const headers = req.headers.set("Authorization", `Bearer ${this.token}`);
+    return req.clone({ headers });
   }
 }
