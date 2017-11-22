@@ -5,6 +5,7 @@ import { Component, OnInit } from "@angular/core";
   template: `
     <nav>
       <cf-title></cf-title>
+      <cf-user-login></cf-user-login>
     </nav>
   `,
   styles: [
