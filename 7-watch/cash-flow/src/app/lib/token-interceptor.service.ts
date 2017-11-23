@@ -17,11 +17,13 @@ export class TokenInterceptorService implements HttpInterceptor {
   }
 
   private subscribeToTokenChanges() {
-    this.busService
-      .getUserToken$()
-      .subscribe(
-        data => (this.token = data ? data.token : "NoAuthorizationProvided")
-      );
+    this.busService.getUserToken$().subscribe(data => this.setTokenIfAny(data));
+  }
+
+  private setTokenIfAny(data) {
+    if (data && data.token) {
+      this.token = data.token;
+    }
   }
 
   public intercept(

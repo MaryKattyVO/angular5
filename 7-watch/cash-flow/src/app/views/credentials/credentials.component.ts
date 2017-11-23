@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CredentialsService } from "./credentials.service";
 import { BusService } from "../../lib/bus.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: "cf-login",
@@ -19,6 +19,7 @@ import { ActivatedRoute } from "@angular/router";
     <button (click)="sendCredential()">{{ pageData.title }}</button>
     <a [routerLink]="['..',pageData.alternate | lowercase]">{{ pageData.alternate }}</a>
   </form>
+  <i>{{ errorMessage }}</i>
   `,
   styles: []
 })
@@ -28,27 +29,40 @@ export class CredentialsComponent implements OnInit {
     credential: { email: "admin@cash-flow.com", password: "secret" },
     title: "LogIn"
   };
+  public errorMessage = "";
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private busService: BusService,
     private credentialsService: CredentialsService,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit() {
+    this.obtainPageDataFromRoute();
+  }
+
+  private obtainPageDataFromRoute() {
     this.pageData = this.activatedRoute.snapshot.data[0];
   }
 
   public sendCredential() {
+    this.errorMessage = "";
     this.credentialsService
       .sendCredential(this.pageData.credential, this.pageData.title)
       .subscribe(
-        data => {
-          this.busService.emitUserToken(data);
-        },
-        error => {
-          this.busService.emitUserToken(null);
-        }
+        data => this.acceptedCredentials(data),
+        error => this.invalidCredentials()
       );
+  }
+
+  private acceptedCredentials(token) {
+    this.busService.emitUserToken(token);
+    this.router.navigateByUrl("/");
+  }
+
+  private invalidCredentials() {
+    this.busService.emitUserToken(null);
+    this.errorMessage = "Invalid Credentials";
   }
 }

@@ -18,7 +18,7 @@ export class BusService {
     return this.userIsAnonymous$.asObservable();
   }
 
-  emitUserToken(userToken: any) {
+  public emitUserToken(userToken: any) {
     this.userToken$.next(userToken);
     this.userIsAnonymous$.next(userToken == null);
   }
