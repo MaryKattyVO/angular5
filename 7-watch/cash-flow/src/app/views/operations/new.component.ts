@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
-import { Operation } from "./operation";
+import { Operation } from "./operation.class";
 
 @Component({
   selector: "cf-new",

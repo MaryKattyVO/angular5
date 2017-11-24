@@ -9,24 +9,20 @@ const routes: Routes = [
   {
     path: "login",
     component: CredentialsComponent,
-    data: [
-      {
-        alternate: "Registration",
-        credential: { email: "admin@cash-flow.com", password: "secret" },
-        title: "LogIn"
-      }
-    ]
+    data: {
+      alternate: "Registration",
+      credential: { email: "admin@cash-flow.com", password: "secret" },
+      title: "LogIn"
+    }
   },
   {
     path: "registration",
     component: CredentialsComponent,
-    data: [
-      {
-        alternate: "LogIn",
-        credential: { email: "", password: "" },
-        title: "Registration"
-      }
-    ]
+    data: {
+      alternate: "LogIn",
+      credential: { email: "", password: "" },
+      title: "Registration"
+    }
   }
 ];
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { OperationsService } from "./operations.service";
-import { Operation } from "./operation";
+import { Operation } from "./operation.class";
 import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
@@ -37,7 +37,7 @@ export class ItemComponent implements OnInit {
   private getDataById() {
     this.operationsService
       .getOperationById$(this._id)
-      .subscribe(data => this.showData(data), err => this.showError(err));
+      .subscribe(data => this.showData(data), err => this.catchError(err));
   }
 
   private showData(data) {
@@ -45,21 +45,20 @@ export class ItemComponent implements OnInit {
     this.message = `Found data for _id: ${this._id}`;
   }
 
-  private showError(err: HttpErrorResponse) {
-    if (err.error instanceof Error) {
-      this.showCallError(err);
+  private catchError(err) {
+    if (err instanceof HttpErrorResponse) {
+      this.catchHttpError(err);
     } else {
-      if (err.status == 404) {
-        this.showNotFoundError();
-      } else {
-        this.showServerError(err);
-      }
+      console.error(err.message);
     }
   }
 
-  private showCallError(err: HttpErrorResponse) {
-    this.message = `An error occurred: ${err.error.message}`;
-    this.fullError = err;
+  private catchHttpError(err: HttpErrorResponse) {
+    if (err.status == 404) {
+      this.showNotFoundError();
+    } else {
+      this.showServerError(err);
+    }
   }
 
   private showNotFoundError() {
@@ -68,7 +67,9 @@ export class ItemComponent implements OnInit {
   }
 
   private showServerError(err: HttpErrorResponse) {
-    this.message = `Server returned code ${err.status}, text: ${err.statusText}`;
+    this.message = `Server returned code ${err.status}, text: ${
+      err.statusText
+    }`;
     this.fullError = err;
   }
 }

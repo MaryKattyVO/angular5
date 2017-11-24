@@ -24,11 +24,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   styles: []
 })
 export class CredentialsComponent implements OnInit {
-  public pageData = {
-    alternate: "Registration",
-    credential: { email: "admin@cash-flow.com", password: "secret" },
-    title: "LogIn"
-  };
+  public pageData: any;
   public errorMessage = "";
 
   constructor(
@@ -43,7 +39,7 @@ export class CredentialsComponent implements OnInit {
   }
 
   private obtainPageDataFromRoute() {
-    this.pageData = this.activatedRoute.snapshot.data[0];
+    this.pageData = this.activatedRoute.snapshot.data;
   }
 
   public sendCredential() {
