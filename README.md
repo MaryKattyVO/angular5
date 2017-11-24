@@ -12,9 +12,9 @@ Listado de artículos para seguir el código:
 
 - [4 - Flujo de datos entre componentes Angular](http://academia-binaria.com/flujo-de-datos-entre-componentes-angular/)
 
-> Work in progress. To be continued....
+- [5 - Servicios inyectables en Angular](http://academia-binaria.com/servicios-inyectables-en-Angular/)
 
-- [5 - Servicios inyectables en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
+> Work in progress. To be continued....
 
 - [6 - Comunicaciones HTTP en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
 
