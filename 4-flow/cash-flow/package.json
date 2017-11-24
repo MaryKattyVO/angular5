@@ -2,8 +2,7 @@
   "name": "cash-flow",
   "version": "5.4.0",
   "description": "Flujo de datos entre componentes Angular",
-  "homepage":
-    "http://academia-binaria.com/flujo-de-datos-entre-componentes-angular/",
+  "homepage": "http://academia-binaria.com/flujo-de-datos-entre-componentes-angular/",
   "author": {
     "name": "Alberto Basalo",
     "url": "https://twitter.com/albertobasalo"
