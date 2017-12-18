@@ -19,6 +19,7 @@ export class CatchInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.started = Date.now();
+    console.debug(req.url);
     return next.handle(req).pipe(tap(this.interceptResponse, this.catchError));
   }
 
@@ -31,7 +32,11 @@ export class CatchInterceptorService implements HttpInterceptor {
 
   private catchError(err) {
     if (err instanceof HttpErrorResponse) {
-      this.catchHttpError(err);
+      if (err.status === 401) {
+        console.warn("Not authorized");
+      } else {
+        console.error(err);
+      }
     } else {
       console.error(err.message);
     }

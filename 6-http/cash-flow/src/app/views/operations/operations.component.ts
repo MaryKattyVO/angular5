@@ -51,22 +51,25 @@ export class OperationsComponent implements OnInit {
       .getNumberOfOperations$()
       .subscribe(
         data => (this.numberOfOperations = data.count),
-        err => this.catchError(err)
+        this.catchError
       );
   }
 
   private catchError(err) {
     if (err instanceof HttpErrorResponse) {
-      this.catchHttpError(err);
+      this.message = `Server returned code ${err.status}, text: ${
+        err.statusText
+      }`;
+      this.fullError = err;
     } else {
-      console.error(err.message);
+      console.warn(err);
     }
   }
 
-  private catchHttpError(err: HttpErrorResponse) {
-    this.message = `Server returned code ${err.status}, text: ${
-      err.statusText
-    }`;
-    this.fullError = err;
-  }
+  // private catchHttpError(err: HttpErrorResponse) {
+  //   this.message = `Server returned code ${err.status}, text: ${
+  //     err.statusText
+  //   }`;
+  //   this.fullError = err;
+  // }
 }
