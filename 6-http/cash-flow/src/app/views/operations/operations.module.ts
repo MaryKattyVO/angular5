@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import { HttpClientModule } from "@angular/common/http";
 
 import { OperationsRoutingModule } from "./operations.routing";
 import { OperationsComponent } from "./operations.component";
@@ -11,7 +10,7 @@ import { ItemComponent } from "./item.component";
 import { OperationsService } from "./operations.service";
 
 @NgModule({
-  imports: [CommonModule, FormsModule, HttpClientModule, OperationsRoutingModule],
+  imports: [CommonModule, FormsModule, OperationsRoutingModule],
   declarations: [
     OperationsComponent,
     NewComponent,
