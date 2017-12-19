@@ -22,8 +22,11 @@ export class CatchInterceptorService implements HttpInterceptor {
     const handledRequest = next.handle(req);
     const successCallback = this.interceptResponse.bind(this);
     const errorCallback = this.catchError.bind(this);
-    const interceptor = tap<HttpEvent<any>>(successCallback, errorCallback);
-    return handledRequest.pipe(interceptor);
+    const interceptionOperator = tap<HttpEvent<any>>(
+      successCallback,
+      errorCallback
+    );
+    return handledRequest.pipe(interceptionOperator);
   }
 
   private interceptResponse(event: HttpEvent<any>) {
