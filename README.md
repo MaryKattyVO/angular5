@@ -14,8 +14,8 @@ Listado de artículos para seguir el código:
 
 - [5 - Servicios inyectables en Angular](http://academia-binaria.com/servicios-inyectables-en-Angular/)
 
-> Work in progress. To be continued....
+- [6 - Comunicaciones HTTP en Angular](http://academia-binaria.com/comunicaciones-http-en-Angular/)
 
-- [6 - Comunicaciones HTTP en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
+> Work in progress. To be continued....
 
 - [7 - Vigilancia y seguridad en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
