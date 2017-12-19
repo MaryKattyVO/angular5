@@ -44,32 +44,31 @@ export class OperationsComponent implements OnInit {
   }
 
   private refreshData() {
+    this.message = `Refreshing Data`;
+    this.fullError = null;
     this.operationsService
       .getOperationsList$()
-      .subscribe(data => (this.operations = data), err => this.catchError(err));
+      .subscribe(this.showOperations.bind(this), this.catchError.bind(this));
     this.operationsService
       .getNumberOfOperations$()
-      .subscribe(
-        data => (this.numberOfOperations = data.count),
-        this.catchError
-      );
+      .subscribe(this.showCount.bind(this), this.catchError.bind(this));
+  }
+
+  private showOperations(operations: Operation[]) {
+    this.operations = operations;
+    this.message = `operations Ok`;
+  }
+  private showCount(data: any) {
+    this.numberOfOperations = data.count;
+    this.message = `count Ok`;
   }
 
   private catchError(err) {
     if (err instanceof HttpErrorResponse) {
-      this.message = `Server returned code ${err.status}, text: ${
-        err.statusText
-      }`;
-      this.fullError = err;
+      this.message = `Http Error: ${err.status}, text: ${err.statusText}`;
     } else {
-      console.warn(err);
+      this.message = `Unknown error, text: ${err.message}`;
     }
+    this.fullError = err;
   }
-
-  // private catchHttpError(err: HttpErrorResponse) {
-  //   this.message = `Server returned code ${err.status}, text: ${
-  //     err.statusText
-  //   }`;
-  //   this.fullError = err;
-  // }
 }

@@ -19,24 +19,23 @@ export class CatchInterceptorService implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.started = Date.now();
-    console.debug(req.url);
-    return next.handle(req).pipe(tap(this.interceptResponse, this.catchError));
+    const handledRequest = next.handle(req);
+    const successCallback = this.interceptResponse.bind(this);
+    const errorCallback = this.catchError.bind(this);
+    const interceptor = tap<HttpEvent<any>>(successCallback, errorCallback);
+    return handledRequest.pipe(interceptor);
   }
 
   private interceptResponse(event: HttpEvent<any>) {
     if (event instanceof HttpResponse) {
-      const elapsed = Date.now() - this.started;
-      console.log(`Request for ${event.url} took ${elapsed} ms.`);
+      const elapsed_ms = Date.now() - this.started;
+      console.debug(`Request for ${event.url} took ${elapsed_ms} ms.`);
     }
   }
 
   private catchError(err) {
     if (err instanceof HttpErrorResponse) {
-      if (err.status === 401) {
-        console.warn("Not authorized");
-      } else {
-        console.error(err);
-      }
+      this.catchHttpError(err);
     } else {
       console.error(err.message);
     }
@@ -44,9 +43,9 @@ export class CatchInterceptorService implements HttpInterceptor {
 
   private catchHttpError(err: HttpErrorResponse) {
     if (err.status === 401) {
-      console.warn("Not authorized");
+      console.log("Not authorized");
     } else {
-      console.error(err.statusText);
+      console.warn(err.statusText);
     }
   }
 }
