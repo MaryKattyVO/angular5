@@ -34,13 +34,13 @@ export class OperationsComponent implements OnInit {
   public saveOperation(operation: Operation) {
     this.operationsService
       .saveOperation$(operation)
-      .subscribe(data => this.refreshData());
+      .subscribe(this.refreshData.bind(this));
   }
 
   public deleteOperation(operation: Operation) {
     this.operationsService
       .deleteOperation$(operation)
-      .subscribe(data => this.refreshData());
+      .subscribe(this.refreshData.bind(this));
   }
 
   private refreshData() {

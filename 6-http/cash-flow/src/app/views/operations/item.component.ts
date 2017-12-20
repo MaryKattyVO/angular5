@@ -37,7 +37,7 @@ export class ItemComponent implements OnInit {
   private getDataById() {
     this.operationsService
       .getOperationById$(this._id)
-      .subscribe(data => this.showData(data), err => this.catchError(err));
+      .subscribe(this.showData.bind(this), this.catchError.bind(this));
   }
 
   private showData(data) {
@@ -49,8 +49,9 @@ export class ItemComponent implements OnInit {
     if (err instanceof HttpErrorResponse) {
       this.catchHttpError(err);
     } else {
-      console.error(err.message);
+      this.message = `Unknown error, text: ${err.message}`;
     }
+    this.fullError = err;
   }
 
   private catchHttpError(err: HttpErrorResponse) {
