@@ -44,11 +44,13 @@ export class CredentialsComponent implements OnInit {
 
   public sendCredential() {
     this.errorMessage = "";
+    const credential = this.pageData.credential;
+    const service = this.pageData.title;
     this.credentialsService
-      .sendCredential(this.pageData.credential, this.pageData.title)
+      .sendCredential(credential, service)
       .subscribe(
-        data => this.acceptedCredentials(data),
-        error => this.invalidCredentials()
+        this.acceptedCredentials.bind(this),
+        this.invalidCredentials.bind(this)
       );
   }
 

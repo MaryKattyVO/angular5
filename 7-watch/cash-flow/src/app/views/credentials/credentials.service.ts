@@ -9,6 +9,7 @@ export class CredentialsService {
   constructor(private http: HttpClient) {}
 
   public sendCredential(credential, service: string): Observable<any> {
-    return this.http.post(this.url + service.toLowerCase(), credential);
+    const credentialsUrl = this.url + service.toLowerCase();
+    return this.http.post(credentialsUrl, credential);
   }
 }
