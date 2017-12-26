@@ -11,7 +11,7 @@ const routes: Routes = [
     component: CredentialsComponent,
     data: {
       alternate: "Registration",
-      credential: { email: "admin@cash-flow.com", password: "secret" },
+      credential: { email: "admin@api-base.com", password: "1234" },
       title: "LogIn"
     }
   },

@@ -11,6 +11,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --aot -o",
+    "start-prod": "ng serve -e prod -o",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
