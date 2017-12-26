@@ -8,20 +8,35 @@ import {
   HttpErrorResponse
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
+import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
-import "rxjs/add/operator/do";
 
 @Injectable()
 export class CatchInterceptorService implements HttpInterceptor {
+  private started;
+
   constructor(private router: Router) {}
 
   public intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    return next
-      .handle(req)
-      .do((event: HttpEvent<any>) => {}, (err: any) => this.catchError(err));
+    this.started = Date.now();
+    const handledRequest = next.handle(req);
+    const successCallback = this.interceptResponse.bind(this);
+    const errorCallback = this.catchError.bind(this);
+    const interceptionOperator = tap<HttpEvent<any>>(
+      successCallback,
+      errorCallback
+    );
+    return handledRequest.pipe(interceptionOperator);
+  }
+
+  private interceptResponse(event: HttpEvent<any>) {
+    if (event instanceof HttpResponse) {
+      const elapsed_ms = Date.now() - this.started;
+      console.debug(`Request for ${event.url} took ${elapsed_ms} ms.`);
+    }
   }
 
   private catchError(err) {
@@ -34,14 +49,14 @@ export class CatchInterceptorService implements HttpInterceptor {
 
   private catchHttpError(err: HttpErrorResponse) {
     if (err.status === 401) {
-      this.catchUnauthorized(err);
+      this.catchUnauthorized();
     } else {
-      console.error(err.statusText);
+      console.warn(err.statusText);
     }
   }
 
-  private catchUnauthorized(err) {
-    console.warn(err.statusText);
+  private catchUnauthorized() {
+    console.log("Not authorized");
     this.navigateToLogin();
   }
   private navigateToLogin() {
