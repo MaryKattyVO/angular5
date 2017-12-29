@@ -16,6 +16,4 @@ Listado de artículos para seguir el código:
 
 - [6 - Comunicaciones HTTP en Angular](http://academia-binaria.com/comunicaciones-http-en-Angular/)
 
-> Work in progress. To be continued....
-
-- [7 - Vigilancia y seguridad en Angular](http://academia-binaria.com/categories/Tutorial/Angular/)
+- [7 - Vigilancia y seguridad en Angular](https://academia-binaria.com/vigilancia-y-seguridad-en-Angular/)
