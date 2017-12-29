@@ -34,14 +34,12 @@ export class CredentialsComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
     this.obtainPageDataFromRoute();
   }
-
   private obtainPageDataFromRoute() {
     this.pageData = this.activatedRoute.snapshot.data;
   }
-
   public sendCredential() {
     this.errorMessage = "";
     const credential = this.pageData.credential;
@@ -53,12 +51,10 @@ export class CredentialsComponent implements OnInit {
         this.invalidCredentials.bind(this)
       );
   }
-
   private acceptedCredentials(token) {
     this.busService.emitUserToken(token);
     this.router.navigateByUrl("/");
   }
-
   private invalidCredentials() {
     this.busService.emitUserToken(null);
     this.errorMessage = "Invalid Credentials";
