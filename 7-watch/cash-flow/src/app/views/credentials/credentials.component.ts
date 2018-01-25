@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { CredentialsService } from "./credentials.service";
-import { BusService } from "../../lib/bus.service";
+import { StoreService } from "../../lib/store.service";
 import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
@@ -29,7 +29,7 @@ export class CredentialsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private busService: BusService,
+    private store: StoreService,
     private credentialsService: CredentialsService,
     private router: Router
   ) {}
@@ -52,11 +52,11 @@ export class CredentialsComponent implements OnInit {
       );
   }
   private acceptedCredentials(token) {
-    this.busService.emitUserToken(token);
+    this.store.emitUserToken(token);
     this.router.navigateByUrl("/");
   }
   private invalidCredentials() {
-    this.busService.emitUserToken(null);
+    this.store.emitUserToken(null);
     this.errorMessage = "Invalid Credentials";
   }
 }

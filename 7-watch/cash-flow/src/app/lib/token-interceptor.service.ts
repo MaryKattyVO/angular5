@@ -6,18 +6,18 @@ import {
   HttpRequest
 } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { BusService } from "./bus.service";
+import { StoreService } from "./store.service";
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
   private token: string = "InitialAuthorizationToken";
 
-  constructor(private busService: BusService) {
+  constructor(private store: StoreService) {
     this.subscribeToTokenChanges();
   }
 
   private subscribeToTokenChanges() {
-    this.busService.getUserToken$().subscribe(this.setTokenIfAny.bind(this));
+    this.store.getUserToken$().subscribe(this.setTokenIfAny.bind(this));
   }
   private setTokenIfAny(data) {
     if (data && data.token) {

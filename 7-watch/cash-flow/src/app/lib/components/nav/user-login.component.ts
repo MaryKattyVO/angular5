@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { BusService } from "../../bus.service";
+import { StoreService } from "../../store.service";
 import { Observable } from "rxjs/Observable";
 
 @Component({
@@ -13,9 +13,9 @@ import { Observable } from "rxjs/Observable";
 export class UserLoginComponent implements OnInit {
   public userIsAnonymous$: Observable<boolean>;
 
-  constructor(private busService: BusService) {}
+  constructor(private store: StoreService) {}
 
   ngOnInit() {
-    this.userIsAnonymous$ = this.busService.getUserIsAnonymous$();
+    this.userIsAnonymous$ = this.store.getUserIsAnonymous$();
   }
 }

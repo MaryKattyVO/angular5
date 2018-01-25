@@ -4,7 +4,7 @@ import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Subject } from "rxjs/Subject";
 
 @Injectable()
-export class BusService {
+export class StoreService {
   private userToken$ = new Subject<any>();
   private userIsAnonymous$ = new BehaviorSubject<boolean>(true);
 
