@@ -5,7 +5,12 @@ import { Subject } from "rxjs/Subject";
 
 @Injectable()
 export class StoreService {
-  private userToken$ = new Subject<any>();
+  private state = {
+    userToken: "",
+    userIsAnonymous: true
+  };
+
+  private userToken$ = new Subject<string>();
   private userIsAnonymous$ = new BehaviorSubject<boolean>(true);
 
   constructor() {}
@@ -16,8 +21,15 @@ export class StoreService {
   public getUserIsAnonymous$(): Observable<boolean> {
     return this.userIsAnonymous$.asObservable();
   }
-  public emitUserToken(userToken: any) {
-    this.userToken$.next(userToken);
-    this.userIsAnonymous$.next(userToken == null);
+  public emitUserToken(userToken: string) {
+    if (userToken) {
+      this.state.userToken = userToken;
+      this.state.userIsAnonymous = false;
+    } else {
+      this.state.userToken = "";
+      this.state.userIsAnonymous = true;
+    }
+    this.userToken$.next(this.state.userToken);
+    this.userIsAnonymous$.next(this.state.userIsAnonymous);
   }
 }

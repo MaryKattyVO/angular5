@@ -29,9 +29,9 @@ export class CredentialsComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private store: StoreService,
     private credentialsService: CredentialsService,
-    private router: Router
+    private router: Router,
+    private store: StoreService
   ) {}
 
   public ngOnInit() {
@@ -51,9 +51,13 @@ export class CredentialsComponent implements OnInit {
         this.invalidCredentials.bind(this)
       );
   }
-  private acceptedCredentials(token) {
-    this.store.emitUserToken(token);
-    this.router.navigateByUrl("/");
+  private acceptedCredentials(responseData) {
+    if (responseData && responseData.token) {
+      this.store.emitUserToken(responseData.token);
+      this.router.navigateByUrl("/");
+    } else {
+      this.invalidCredentials();
+    }
   }
   private invalidCredentials() {
     this.store.emitUserToken(null);

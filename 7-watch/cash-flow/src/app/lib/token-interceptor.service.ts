@@ -10,19 +10,17 @@ import { StoreService } from "./store.service";
 
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
-  private token: string = "InitialAuthorizationToken";
+  private token: string = "";
 
   constructor(private store: StoreService) {
     this.subscribeToTokenChanges();
   }
 
   private subscribeToTokenChanges() {
-    this.store.getUserToken$().subscribe(this.setTokenIfAny.bind(this));
+    this.store.getUserToken$().subscribe(this.setToken.bind(this));
   }
-  private setTokenIfAny(data) {
-    if (data && data.token) {
-      this.token = data.token;
-    }
+  private setToken(token) {
+    this.token = token;
   }
   public intercept(
     req: HttpRequest<any>,
