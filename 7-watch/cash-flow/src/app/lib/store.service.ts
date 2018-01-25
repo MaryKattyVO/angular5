@@ -11,11 +11,13 @@ export class StoreService {
   };
 
   private userToken$ = new Subject<string>();
-  private userIsAnonymous$ = new BehaviorSubject<boolean>(true);
+  private userIsAnonymous$ = new BehaviorSubject<boolean>(
+    this.state.userIsAnonymous
+  );
 
   constructor() {}
 
-  public getUserToken$(): Observable<any> {
+  public getUserToken$(): Observable<string> {
     return this.userToken$.asObservable();
   }
   public getUserIsAnonymous$(): Observable<boolean> {

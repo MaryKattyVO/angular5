@@ -1,15 +1,14 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
-
-import { AppRoutingModule } from "./app.routing";
 import { AppComponent } from "./app.component";
+import { AppRoutingModule } from "./app.routing";
+import { BrowserModule } from "@angular/platform-browser";
+import { CatchInterceptorService } from "./lib/catch-interceptor.service";
 import { ComponentsModule } from "./lib/components/components.module";
 import { HomeModule } from "./views/home/home.module";
-import { NotFoundModule } from "./views/not-found/not-found.module";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
-import { TokenInterceptorService } from "./lib/token-interceptor.service";
-import { CatchInterceptorService } from "./lib/catch-interceptor.service";
+import { NgModule } from "@angular/core";
+import { NotFoundModule } from "./views/not-found/not-found.module";
 import { StoreService } from "./lib/store.service";
+import { TokenInterceptorService } from "./lib/token-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,6 @@ import { StoreService } from "./lib/store.service";
     NotFoundModule
   ],
   providers: [
-    StoreService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
@@ -32,7 +30,8 @@ import { StoreService } from "./lib/store.service";
       provide: HTTP_INTERCEPTORS,
       useClass: CatchInterceptorService,
       multi: true
-    }
+    },
+    StoreService
   ],
   bootstrap: [AppComponent]
 })

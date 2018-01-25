@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { CredentialsService } from "./credentials.service";
-import { StoreService } from "../../lib/store.service";
 import { ActivatedRoute, Router } from "@angular/router";
+import { StoreService } from "../../lib/store.service";
 
 @Component({
   selector: "cf-login",
