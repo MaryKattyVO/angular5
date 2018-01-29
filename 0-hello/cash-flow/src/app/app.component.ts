@@ -13,6 +13,9 @@ import { Component } from "@angular/core";
     <h2>Here are some links to help you start: </h2>
     <ul>
       <li>
+        <h2><a target="_blank" rel="noopener" href="https://academia-binaria.com/hola-angular-cli/">Tutorial Angular 5 Academia Binaria</a></h2>
+      </li>
+      <li>
         <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
       </li>
       <li>
@@ -27,5 +30,5 @@ import { Component } from "@angular/core";
   styles: []
 })
 export class AppComponent {
-  title = "escuela.it";
+  title = "Academia Binaria";
 }
