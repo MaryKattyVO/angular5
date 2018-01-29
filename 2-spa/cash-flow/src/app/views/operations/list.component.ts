@@ -3,9 +3,9 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "cf-list",
   template: `
-    <p>
-      list works!
-    </p>
+    <h3>
+      A list of well known constants.
+    </h3>
     <ul>
       <li><a routerLink="/operations/271">Number e</a></li>
       <li><a routerLink="/operations/314">Pi</a></li>

@@ -4,7 +4,7 @@ import { Component, OnInit } from "@angular/core";
   selector: "cf-new",
   template: `
     <p>
-      new works!
+      NEW is still a work in progress.
     </p>
   `,
   styles: []

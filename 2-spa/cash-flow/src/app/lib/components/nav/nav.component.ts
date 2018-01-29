@@ -4,7 +4,17 @@ import { Component, OnInit } from "@angular/core";
   selector: "cf-nav",
   template: `
     <nav>
-      <cf-title></cf-title>
+      <ul class="row">
+        <li class="button button-outline">
+          <cf-title></cf-title>
+        </li>
+        <li class="button button-outline">
+          <a routerLink="/operations">Operations</a>
+        </li>
+        <li class="button button-outline">
+          <a routerLink="/about">About Us</a>
+        </li>
+      </ul>
     </nav>
   `,
   styles: [
