@@ -5,4 +5,8 @@ export class Operation {
   public amount: number = 0;
   public description: string = "";
   public kind: string;
+
+  constructor() {
+    this._id = new Date().getTime().toString();
+  }
 }

@@ -4,10 +4,10 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: "cf-item",
   template: `
-  <p>
-    item works!
-  </p>
-  <h3>{{ _id }}</h3>
+  <h3>
+    Operation detail for Id...
+  </h3>
+  <h5>{{ _id }}</h5>
   `,
   styles: []
 })

@@ -3,9 +3,9 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "cf-list",
   template: `
-    <p>
-      list is a work in progress!
-    </p>
+    <h3>
+      this list component is a work in progress!
+    </h3>
   `,
   styles: []
 })

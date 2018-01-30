@@ -4,7 +4,7 @@ import { Component, OnInit } from "@angular/core";
   selector: "cf-footer",
   template: `
     <footer>
-      Developed by <a href="https://twitter.com/albertobasalo">Alberto Basalo</a>
+      <a href="https://academia-binaria.com/categories/Tutorial/Angular/">Tutorial</a> developed by <a href="https://twitter.com/albertobasalo">Alberto Basalo</a>
     </footer>
   `,
   styles: [

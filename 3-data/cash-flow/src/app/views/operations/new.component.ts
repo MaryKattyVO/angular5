@@ -31,6 +31,7 @@ import { Operation } from "./operation";
   <table *ngIf="numberOfOperations>0;else emptyList">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Description</th>
         <th>Kind</th>
         <th>Amount</th>
@@ -39,6 +40,7 @@ import { Operation } from "./operation";
     </thead>
     <tbody>
       <tr *ngFor="let operation of operations">
+        <td><a routerLink="/operations/{{ operation._id }}" >{{ operation._id }}</a></td>  
         <td>{{ operation.description }}</td>
         <td>{{ operation.kind }}</td>
         <td>{{ operation.amount | number:'7.2-2' }}</td>
@@ -65,19 +67,17 @@ export class NewComponent implements OnInit {
 
   public saveOperation() {
     const clonedOperation = this.cloneOperation(this.operation);
-    clonedOperation._id = new Date().getTime().toString();
     this.operations.push(clonedOperation);
     this.numberOfOperations = this.operations.length;
     this.operation = new Operation();
   }
-
   public deleteOperation(operation: Operation) {
     const index = this.operations.indexOf(operation);
     this.operations.splice(index, 1);
     this.numberOfOperations = this.operations.length;
   }
 
-  cloneOperation(originalOperation: Operation): Operation {
+  private cloneOperation(originalOperation: Operation): Operation {
     const targetOperation = Object.assign({}, originalOperation);
     return targetOperation;
   }
