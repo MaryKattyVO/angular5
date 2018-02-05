@@ -8,18 +8,18 @@ import { Operation } from "./operation";
   <form class="container" #operationForm="ngForm">
     <label for="description">Description</label>
     <input name="description"
-          #inputDescription
+          #descriptionInput
           [value]="operation.description"
-          (change)="operation.description=inputDescription.value"
+          (change)="operation.description=descriptionInput.value"
           type="text" />
     <label for="amount">Amount</label>
     <input name="amount" id="amount"
           [(ngModel)]="operation.amount"
           required 
-          #amount="ngModel"
+          #amountModel="ngModel"
           type="number"/>
-    <span *ngIf="amount.invalid && (amount.dirty || amount.touched)">
-          {{amount.errors | json}}
+    <span *ngIf="amountModel.invalid && (amountModel.dirty || amountModel.touched)">
+          {{amountModel.errors | json}}
     </span>
     <label>Kind of Operation</label>
     <select name="kind" [(ngModel)]="operation.kind">
