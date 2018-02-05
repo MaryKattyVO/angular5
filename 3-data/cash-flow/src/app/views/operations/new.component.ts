@@ -5,7 +5,7 @@ import { Operation } from "./operation";
   selector: "cf-new",
   template: `
   <h2>{{ title | uppercase }}</h2>
-  <form class="container">
+  <form class="container" #operationForm="ngForm">
     <label for="description">Description</label>
     <input name="description"
           #inputDescription
@@ -13,16 +13,21 @@ import { Operation } from "./operation";
           (change)="operation.description=inputDescription.value"
           type="text" />
     <label for="amount">Amount</label>
-    <input name="amount"
+    <input name="amount" id="amount"
           [(ngModel)]="operation.amount"
+          required 
+          #amount="ngModel"
           type="number"/>
+    <span *ngIf="amount.invalid && (amount.dirty || amount.touched)">
+          {{amount.errors | json}}
+    </span>
     <label>Kind of Operation</label>
     <select name="kind" [(ngModel)]="operation.kind">
       <option [value]="">Please select a kind</option>
       <option *ngFor="let kind of kindsOfOperations"
             [value]="kind">{{kind}}</option>
     </select>
-    <button (click)="saveOperation()">Save</button>
+    <button (click)="saveOperation()" [disabled]="operationForm.invalid">Save</button>
   </form>
   <blockquote>
     Number of Operations:{{ numberOfOperations }}
@@ -61,9 +66,9 @@ export class NewComponent implements OnInit {
   public operations: Operation[] = [];
   public title = "New Operation";
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public saveOperation() {
     const clonedOperation = this.cloneOperation(this.operation);
