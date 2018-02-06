@@ -4,8 +4,23 @@ import { Component, OnInit } from "@angular/core";
   selector: "cf-nav",
   template: `
     <nav>
-      <cf-title></cf-title>
-      <cf-user-login></cf-user-login>
+      <ul class="row">
+        <li class="button button-outline">
+          <cf-title></cf-title>
+        </li>
+        <li class="button button-outline">
+          <a routerLink="/operations">Operations</a>
+        </li>
+        <li class="button button-outline">
+          <a routerLink="/about">About Us</a>
+        </li>
+        <li class="button button-outline">
+        <cf-user-login></cf-user-login>
+        </li>
+        <li>
+          <cf-user-message></cf-user-message>
+        </li>
+      </ul>
     </nav>
   `,
   styles: [

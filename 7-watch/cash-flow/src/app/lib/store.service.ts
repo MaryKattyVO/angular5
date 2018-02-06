@@ -7,13 +7,15 @@ import { Subject } from "rxjs/Subject";
 export class StoreService {
   private state = {
     userToken: "",
-    userIsAnonymous: true
+    userIsAnonymous: true,
+    userMessage: ""
   };
 
   private userToken$ = new Subject<string>();
   private userIsAnonymous$ = new BehaviorSubject<boolean>(
     this.state.userIsAnonymous
   );
+  private userMessage$ = new Subject<string>();
 
   constructor() {}
 
@@ -33,5 +35,12 @@ export class StoreService {
     }
     this.userToken$.next(this.state.userToken);
     this.userIsAnonymous$.next(this.state.userIsAnonymous);
+  }
+  public getUserMessage$(): Observable<string> {
+    return this.userMessage$.asObservable();
+  }
+  public emitUserMessage(userMessage: string) {
+    this.state.userMessage = userMessage;
+    this.userMessage$.next(this.state.userMessage);
   }
 }

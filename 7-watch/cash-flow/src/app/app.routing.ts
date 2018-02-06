@@ -9,6 +9,10 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
+    path: "about",
+    loadChildren: "./views/about/about.module#AboutModule"
+  },
+  {
     path: "credentials",
     loadChildren: "./views/credentials/credentials.module#CredentialsModule"
   },
