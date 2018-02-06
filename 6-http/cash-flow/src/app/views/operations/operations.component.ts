@@ -15,8 +15,11 @@ import { HttpErrorResponse } from "@angular/common/http";
       [operations]="operations" 
       (delete)="deleteOperation($event)" >
     </cf-list>
-    <h5>{{ message }}</h5>
-    <h5>{{ fullError | json }}</h5>
+    
+    <blockquote>
+    <h5>Message: {{ message }}</h5>
+    <em><h5>Error: {{ fullError | json }}</h5></em>
+  </blockquote>
   `,
   styles: []
 })
@@ -45,7 +48,7 @@ export class OperationsComponent implements OnInit {
 
   private refreshData() {
     this.message = `Refreshing Data`;
-    this.fullError = null;
+    this.fullError = "";
     this.operationsService
       .getOperationsList$()
       .subscribe(this.showOperations.bind(this), this.catchError.bind(this));
