@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Operation } from "./operation.class";
 import { OperationsService } from "./operations.service";
+import { StoreService } from "../../lib/store.service";
 
 @Component({
   selector: "cf-operations",
@@ -20,7 +21,10 @@ import { OperationsService } from "./operations.service";
 export class OperationsComponent implements OnInit {
   public numberOfOperations = 0;
   public operations: Operation[] = [];
-  constructor(private operationsService: OperationsService) {}
+  constructor(
+    private operationsService: OperationsService,
+    private store: StoreService
+  ) {}
 
   ngOnInit() {
     this.refreshData();
@@ -42,8 +46,9 @@ export class OperationsComponent implements OnInit {
     this.operationsService
       .getOperationsList$()
       .subscribe(data => (this.operations = data));
-    this.operationsService
-      .getNumberOfOperations$()
-      .subscribe(data => (this.numberOfOperations = data.count));
+    this.operationsService.getNumberOfOperations$().subscribe(data => {
+      this.numberOfOperations = data.count;
+      this.store.emitUserMessage(`Ops: ${this.numberOfOperations}`);
+    });
   }
 }

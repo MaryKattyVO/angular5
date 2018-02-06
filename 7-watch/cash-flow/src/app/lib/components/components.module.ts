@@ -5,7 +5,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { TitleComponent } from "./nav/title.component";
 import { UserLoginComponent } from "./nav/user-login.component";
-import { UserMessageComponent } from "./nav/user-message.component.";
+import { UserMessageComponent } from "./nav/user-message.component";
 
 @NgModule({
   imports: [CommonModule, RouterModule],
