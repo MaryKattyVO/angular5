@@ -3,9 +3,19 @@ import { Component, OnInit } from "@angular/core";
 @Component({
   selector: "cf-nav",
   template: `
-    <nav>
+  <nav>
+  <ul class="row">
+    <li class="button button-outline">
       <cf-title></cf-title>
-    </nav>
+    </li>
+    <li class="button button-outline">
+      <a routerLink="/operations">Operations</a>
+    </li>
+    <li class="button button-outline">
+      <a routerLink="/about">About Us</a>
+    </li>
+  </ul>
+</nav>
   `,
   styles: [
     `
