@@ -15,7 +15,7 @@ import { Component, OnInit } from "@angular/core";
           <a routerLink="/about">About Us</a>
         </li>
         <li class="button button-outline">
-        <cf-user-login></cf-user-login>
+          <cf-user-login></cf-user-login>
         </li>
         <li>
           <cf-user-message></cf-user-message>
