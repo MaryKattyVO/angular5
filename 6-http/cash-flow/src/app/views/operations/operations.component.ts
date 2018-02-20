@@ -37,41 +37,40 @@ export class OperationsComponent implements OnInit {
   public saveOperation(operation: Operation) {
     this.operationsService
       .saveOperation$(operation)
-      .subscribe(this.refreshData.bind(this));
+      .subscribe(this.refreshData);
   }
 
   public deleteOperation(operation: Operation) {
     this.operationsService
       .deleteOperation$(operation)
-      .subscribe(this.refreshData.bind(this));
+      .subscribe(this.refreshData);
   }
 
-  private refreshData() {
+  private refreshData = () => {
     this.message = `Refreshing Data`;
     this.fullError = "";
     this.operationsService
       .getOperationsList$()
-      .subscribe(this.showOperations.bind(this), this.catchError.bind(this));
+      .subscribe(this.showOperations, this.catchError);
     this.operationsService
       .getNumberOfOperations$()
-      .subscribe(this.showCount.bind(this), this.catchError.bind(this));
-  }
-
-  private showOperations(operations: Operation[]) {
+      .subscribe(this.showCount, this.catchError);
+  };
+  private showOperations = (operations: Operation[]) => {
     this.operations = operations;
     this.message = `operations Ok`;
-  }
-  private showCount(data: any) {
+  };
+  private showCount = (data: any) => {
     this.numberOfOperations = data.count;
     this.message = `count Ok`;
-  }
+  };
 
-  private catchError(err) {
+  private catchError = err => {
     if (err instanceof HttpErrorResponse) {
       this.message = `Http Error: ${err.status}, text: ${err.statusText}`;
     } else {
       this.message = `Unknown error, text: ${err.message}`;
     }
     this.fullError = err;
-  }
+  };
 }
