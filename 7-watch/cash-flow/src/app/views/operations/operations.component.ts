@@ -33,22 +33,25 @@ export class OperationsComponent implements OnInit {
   public saveOperation(operation: Operation) {
     this.operationsService
       .saveOperation$(operation)
-      .subscribe(data => this.refreshData());
+      .subscribe(this.refreshData);
   }
 
   public deleteOperation(operation: Operation) {
     this.operationsService
       .deleteOperation$(operation)
-      .subscribe(data => this.refreshData());
+      .subscribe(this.refreshData);
   }
 
-  private refreshData() {
+  private refreshData = () => {
     this.operationsService
       .getOperationsList$()
       .subscribe(data => (this.operations = data));
-    this.operationsService.getNumberOfOperations$().subscribe(data => {
-      this.numberOfOperations = data.count;
-      this.store.emitUserMessage(`Ops: ${this.numberOfOperations}`);
-    });
-  }
+    this.operationsService
+      .getNumberOfOperations$()
+      .subscribe(this.showNumberOfOperations);
+  };
+  private showNumberOfOperations = (data: any) => {
+    this.numberOfOperations = data.count;
+    this.store.emitUserMessage(`Ops: ${this.numberOfOperations}`);
+  };
 }

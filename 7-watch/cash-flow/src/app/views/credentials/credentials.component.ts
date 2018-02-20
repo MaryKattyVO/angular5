@@ -46,21 +46,18 @@ export class CredentialsComponent implements OnInit {
     const service = this.pageData.title;
     this.credentialsService
       .sendCredential(credential, service)
-      .subscribe(
-        this.acceptedCredentials.bind(this),
-        this.invalidCredentials.bind(this)
-      );
+      .subscribe(this.acceptedCredentials, this.invalidCredentials);
   }
-  private acceptedCredentials(responseData) {
+  private acceptedCredentials = responseData => {
     if (responseData && responseData.token) {
       this.store.emitUserToken(responseData.token);
       this.router.navigateByUrl("/");
     } else {
       this.invalidCredentials();
     }
-  }
-  private invalidCredentials() {
+  };
+  private invalidCredentials = () => {
     this.store.emitUserToken(null);
     this.errorMessage = "Invalid Credentials";
-  }
+  };
 }
