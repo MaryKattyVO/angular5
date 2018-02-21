@@ -25,7 +25,7 @@ export class StoreService {
   public getUserIsAnonymous$(): Observable<boolean> {
     return this.userIsAnonymous$.asObservable();
   }
-  public emitUserToken(userToken: string) {
+  public setUserToken(userToken: string) {
     if (userToken) {
       this.state.userToken = userToken;
       this.state.userIsAnonymous = false;
@@ -39,7 +39,7 @@ export class StoreService {
   public getUserMessage$(): Observable<string> {
     return this.userMessage$.asObservable();
   }
-  public emitUserMessage(userMessage: string) {
+  public setUserMessage(userMessage: string) {
     this.state.userMessage = userMessage;
     this.userMessage$.next(this.state.userMessage);
   }

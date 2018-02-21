@@ -50,14 +50,14 @@ export class CredentialsComponent implements OnInit {
   }
   private acceptedCredentials = responseData => {
     if (responseData && responseData.token) {
-      this.store.emitUserToken(responseData.token);
+      this.store.setUserToken(responseData.token);
       this.router.navigateByUrl("/");
     } else {
       this.invalidCredentials();
     }
   };
   private invalidCredentials = () => {
-    this.store.emitUserToken(null);
+    this.store.setUserToken(null);
     this.errorMessage = "Invalid Credentials";
   };
 }

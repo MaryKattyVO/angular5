@@ -17,11 +17,11 @@ export class TokenInterceptorService implements HttpInterceptor {
   }
 
   private subscribeToTokenChanges() {
-    this.store.getUserToken$().subscribe(this.setToken.bind(this));
+    this.store.getUserToken$().subscribe(this.setToken);
   }
-  private setToken(token) {
-    this.token = token;
-  }
+
+  private setToken = token => (this.token = token);
+
   public intercept(
     req: HttpRequest<any>,
     next: HttpHandler

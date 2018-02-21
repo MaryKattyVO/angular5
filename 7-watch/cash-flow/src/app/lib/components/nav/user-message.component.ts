@@ -13,18 +13,18 @@ import { map } from "rxjs/operators";
   styles: []
 })
 export class UserMessageComponent implements OnInit, OnDestroy {
-  public userMessage$: Observable<string>;
+  public userMessage$: Observable<string>; // {{ userMessage$ | async }}
   public userMessage: string; // {{ userMessage }}
   private subscription: Subscription;
   constructor(private store: StoreService) {}
 
   ngOnInit() {
+    this.userMessage$ = this.store
+      .getUserMessage$()
+      .pipe(map(message => message + " --- mapped"));
     this.subscription = this.store
       .getUserMessage$()
       .subscribe(data => (this.userMessage = data));
-    this.userMessage$ = this.store
-      .getUserMessage$()
-      .pipe(map(data => data + " --- ok"));
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

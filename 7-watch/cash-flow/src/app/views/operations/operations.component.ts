@@ -45,13 +45,13 @@ export class OperationsComponent implements OnInit {
   private refreshData = () => {
     this.operationsService
       .getOperationsList$()
-      .subscribe(data => (this.operations = data));
+      .subscribe(operations => (this.operations = operations));
     this.operationsService
       .getNumberOfOperations$()
       .subscribe(this.showNumberOfOperations);
   };
   private showNumberOfOperations = (data: any) => {
     this.numberOfOperations = data.count;
-    this.store.emitUserMessage(`Ops: ${this.numberOfOperations}`);
+    this.store.setUserMessage(`Ops: ${this.numberOfOperations}`);
   };
 }

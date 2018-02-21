@@ -22,46 +22,44 @@ export class CatchInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const successCallback = this.interceptResponse.bind(this);
-    const errorCallback = this.catchError.bind(this);
     const interceptionOperator = tap<HttpEvent<any>>(
-      successCallback,
-      errorCallback
+      this.interceptResponse,
+      this.catchError
     );
     this.started = Date.now();
-    this.store.emitUserMessage("");
+    this.store.setUserMessage("");
     const handledRequest = next.handle(req);
     return handledRequest.pipe(interceptionOperator);
   }
 
-  private interceptResponse(event: HttpEvent<any>) {
+  private interceptResponse = (event: HttpEvent<any>) => {
     if (event instanceof HttpResponse) {
       const elapsed_ms = Date.now() - this.started;
       console.debug(`Request for ${event.url} took ${elapsed_ms} ms.`);
     }
-  }
+  };
 
-  private catchError(err) {
+  private catchError = err => {
     if (err instanceof HttpErrorResponse) {
       this.catchHttpError(err);
     } else {
       console.error(err.message);
-      this.store.emitUserMessage(err.message);
+      this.store.setUserMessage(err.message);
     }
-  }
+  };
 
   private catchHttpError(err: HttpErrorResponse) {
     if (err.status === 401) {
       this.catchUnauthorized();
     } else {
       console.warn(err.statusText);
-      this.store.emitUserMessage(err.statusText);
+      this.store.setUserMessage(err.statusText);
     }
   }
 
   private catchUnauthorized() {
     console.log("Not authorized");
-    this.store.emitUserMessage("Not authorized");
+    this.store.setUserMessage("Not authorized");
     this.navigateToLogin();
   }
   private navigateToLogin() {

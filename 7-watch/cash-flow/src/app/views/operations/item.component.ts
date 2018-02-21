@@ -37,21 +37,21 @@ export class ItemComponent implements OnInit {
   private getDataById() {
     this.operationsService
       .getOperationById$(this._id)
-      .subscribe(data => this.showData(data), err => this.catchError(err));
+      .subscribe(this.showData, this.catchError);
   }
 
-  private showData(data) {
-    this.operation = data;
+  private showData = operation => {
+    this.operation = operation;
     this.message = `Found data for _id: ${this._id}`;
-  }
+  };
 
-  private catchError(err) {
+  private catchError = err => {
     if (err instanceof HttpErrorResponse) {
       this.catchHttpError(err);
     } else {
       console.error(err.message);
     }
-  }
+  };
 
   private catchHttpError(err: HttpErrorResponse) {
     if (err.status == 404) {
