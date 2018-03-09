@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { NgModule, transition } from "@angular/core";
 import { NotFoundModule } from "./views/not-found/not-found.module";
 import { RequestInterceptorService } from "./lib/request-interceptor.service";
+import { NothingInterceptorService } from "./lib/nothing-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,11 @@ import { RequestInterceptorService } from "./lib/request-interceptor.service";
     NotFoundModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NothingInterceptorService,
+      multi: true
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptorService,

@@ -1,14 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Operation } from "./operation";
+import { CounterService } from "./counter.service";
 
 @Injectable()
 export class OperationsService {
   private operations: Operation[] = [];
 
-  constructor() {}
+  constructor(private counter: CounterService) {}
 
   public getNumberOfOperations(): number {
-    return this.operations.length;
+    return this.counter.getCount(this.operations);
   }
 
   public getOperationsList(): Operation[] {
